@@ -5,5 +5,9 @@ router.get("/", (req, res) => {
   res.send("Hello World");
 }); 
 
+router.use("/blogs", require("./blogs"));
+
+
+
 
 module.exports = router;
