@@ -1,0 +1,3 @@
+### Get all contacts
+GET http://cse-341-project1-w9se.onrender.com/contacts
+Content-Type: application/json
