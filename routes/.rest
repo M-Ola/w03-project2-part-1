@@ -1,3 +1,27 @@
-### Get all contacts
-GET http://cse-341-project1-w9se.onrender.com/contacts
+### Get all blogs
+GET https://w03-project2-part-1.onrender.com/blogs
 Content-Type: application/json
+
+
+### Get all blog by id
+GET https://w03-project2-part-1.onrender.com/blogs
+Content-Type: application/json
+
+
+### Create blog
+POST https://w03-project2-part-1.onrender.com/blogs HTTP/1.1
+Content-Type: application/json
+
+
+{
+  "title": "My First Blog",
+  "content": "This is a full blog content with more than ten characters.",
+  "author": "John Doe",
+  "category": "Tech",
+  "summary": "A brief summary of the blog.",
+  "userName": "johndoe123"
+}
+
+
+
+    

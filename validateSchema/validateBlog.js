@@ -6,8 +6,8 @@ const blogSchema = Joi.object({
   author: Joi.string().max(100).required(),
   category: Joi.string().max(50).required(),
   summary: Joi.string().max(200).required(),
-  createdAt: Joi.string().max(50),
-  userName: Joi.string().max(50).required(),
+  createdAt: Joi.date().default(() => new Date()),
+  userName: Joi.string().max(50).required()
 });
 
 const validateBlog = (req, res, next) => {
@@ -18,7 +18,5 @@ const validateBlog = (req, res, next) => {
   }
   next();
 };
-
-
 
 module.exports = validateBlog;
