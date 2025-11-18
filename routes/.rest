@@ -14,14 +14,20 @@ Content-Type: application/json
 
 
 {
-  "title": "My First Blog",
+  "title": "My Second Blog",
   "content": "This is a full blog content with more than ten characters.",
-  "author": "John Doe",
+  "author": "John Paul",
   "category": "Tech",
   "summary": "A brief summary of the blog.",
-  "userName": "johndoe123"
+  "userName": "john5555"
 }
 
 
+### Update blog
+PUT https://w03-project2-part-1.onrender.com/  HTTP/1.1
+Content-Type: application/json
 
-    
+
+### Update blog
+DELETE https://w03-project2-part-1.onrender.com/ 
+Content-Type: application/json

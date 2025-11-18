@@ -16,6 +16,7 @@ const validateBlog = (req, res, next) => {
     const messages = error.details.map((detail) => detail.message);
     return res.status(400).json({ errors: messages });
   }
+  req.body = value;
   next();
 };
 
