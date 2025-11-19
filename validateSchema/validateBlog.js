@@ -12,7 +12,7 @@ const blogSchema = Joi.object({
 
 const validateBlog = (req, res, next) => {
   const { error } = blogSchema.validate(req.body, { abortEarly: false });
-  if (error) {
+  if (error, value) {
     const messages = error.details.map((detail) => detail.message);
     return res.status(400).json({ errors: messages });
   }
