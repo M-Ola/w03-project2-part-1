@@ -19,7 +19,7 @@ Content-Type: application/json
   "author": "John Craig",
   "category": "Tech",
   "summary": "A brief summary of the blog.",
-  "userName": "john5555"
+  "userName": "john5"
 }
 
 
