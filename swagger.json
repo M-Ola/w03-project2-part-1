@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "openapi": "5.0.1",
   "info": {
-    "title": "Contacts Api",
-    "description": "Contacts Api",
+    "title": "Blogs Api",
+    "description": "Blogs Api",
     "version": "1.0.0"
   },
   "servers": [
@@ -21,6 +21,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }
