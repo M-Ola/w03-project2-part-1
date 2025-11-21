@@ -26,8 +26,15 @@ Content-Type: application/json
 ### Update blog
 PUT https://w03-project2-part-1.onrender.com/  HTTP/1.1
 Content-Type: application/json
+title": "politics",
+    "content": "Environment on thoughts",
+    "author": "Mike Craig",
+    "category": "lifestyle",
+    "Summary": " Thought process and peer pressure",
+    "createdAt": "2025-11-14T00:00:00.000Z",
+    "userName": "mike222"
 
 
-### Update blog
+### delete blog
 DELETE https://w03-project2-part-1.onrender.com/ 
 Content-Type: application/json
