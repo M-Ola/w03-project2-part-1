@@ -24,7 +24,7 @@ Content-Type: application/json
 
 
 ### Update blog
-PUT https://w03-project2-part-1.onrender.com/blogs/6920212d017a6689fa3d04d9 HTTP/1.1
+PUT https://w03-project2-part-1.onrender.com/blogs/69203e5d8942f7a674ff47d6 HTTP/1.1
 Content-Type: application/json
      
      {
