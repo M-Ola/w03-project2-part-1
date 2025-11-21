@@ -22,7 +22,7 @@ const doc = {
   openapi: "3.0.0",
   info: {
     title: "Blogs API",
-    description: "Blogs CRUD API",
+    description: "Blogs API",
     version: "1.0.0",
   },
   servers: [
