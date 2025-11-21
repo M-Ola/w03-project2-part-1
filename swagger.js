@@ -53,7 +53,7 @@ const doc = {
           author: { type: "string" },
           category: { type: "string" },
           summary: { type: "string" },
-          createdAt: { type: "date", format: "date-time" },
+          createdAt: { type: "string", format: "date-time" },
           userName: { type: "string" },
         },
       },
@@ -62,11 +62,6 @@ const doc = {
 };
 
 const outputFile = "./swagger.json";
-const endpointsFiles = ["./routes/index.js"]; // or ./routes/blogs.js if that’s where your routes are
+const endpointsFiles = ["./routes/index.js"];
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
-
-
-
-
-

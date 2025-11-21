@@ -1,5 +1,4 @@
 {
-  "swagger": "2.0",
   "openapi": "3.0.0",
   "info": {
     "title": "Blogs API",
@@ -39,10 +38,14 @@
     },
     "/blogs/": {
       "get": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Get all blogs",
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of blogs"
           },
           "500": {
             "description": "Internal Server Error"
@@ -50,40 +53,62 @@
         }
       },
       "post": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Create a new blog",
         "description": "",
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Blog created successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Validation error"
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Blog"
+              }
+            }
           }
         }
       }
     },
     "/blogs/{id}": {
       "get": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Get blog by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "MongoDB ObjectId of the blog",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Blog found"
           },
           "400": {
             "description": "Bad Request"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Blog not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -91,49 +116,75 @@
         }
       },
       "put": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Update blog by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "MongoDB ObjectId of the blog",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Blog updated successfully"
           },
           "400": {
             "description": "Bad Request"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Blog not found"
           },
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Blog"
+              }
+            }
+          }
         }
       },
       "delete": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Delete blog by ID",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "MongoDB ObjectId of the blog",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Blog deleted successfully"
           },
           "400": {
             "description": "Bad Request"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Blog not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -218,7 +269,7 @@
                 "properties": {
                   "type": {
                     "type": "string",
-                    "example": "date"
+                    "example": "string"
                   },
                   "format": {
                     "type": "string",
