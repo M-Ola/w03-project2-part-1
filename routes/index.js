@@ -7,7 +7,9 @@ router.get("/", (req, res) => {
 }); 
 
 router.use("/blogs", require("./blogs"));
+router.use("/comments", require("./comments"));
 router.use("/itineraries", require("./itineraries"));
+
 
 
 

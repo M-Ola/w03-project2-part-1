@@ -52,9 +52,20 @@ const doc = {
           createdAt: { type: "string", format: "date-time" },
         },
       },
+      Comment: {
+        type: "object",
+        required: ["blogId", "userName", "text"],
+        properties: {
+          blogId: { type: "string", example: "64f123abc456def789012345" },
+          userName: { type: "string", example: "reviewer1" },
+          comment: { type: "string", example: "Great post!" },
+          createdAt: { type: "string", format: "date-time", example: "2025-11-22T17:20:00Z" }
+        },
+      },
     },
   },
-};
+   };
+  
 
 
 const outputFile = "./swagger.json";

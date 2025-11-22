@@ -3,7 +3,7 @@ const ObjectId = require("mongodb").ObjectId;
 const isValidObjectId = (id) => ObjectId.isValid(id);
 
 
-// GET all blogs
+// GET all itineraries
 const getAllItineraries = async (req, res) => {
   try {
     const result = await mongodb.getDatabase().collection("itineraries").find();
@@ -16,7 +16,7 @@ const getAllItineraries = async (req, res) => {
 };
 
 
-// GET single blog
+// GET single itinerary
 const getSingleItinerary = async (req, res) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {
@@ -41,7 +41,7 @@ const getSingleItinerary = async (req, res) => {
   }
 };
 
-// CREATE blog
+// CREATE itinerary
 const createItinerary = async (req, res) => {
   const itinerary = req.body; // already validated by Joi
   try {
@@ -60,7 +60,7 @@ const createItinerary = async (req, res) => {
 };
 
 
-// UPDATE blog
+// UPDATE itinerary
 const updateItinerary = async (req, res) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {
