@@ -9,7 +9,7 @@ const doc = {
   },
   servers: [
     {
-      url: "http://w03-project2-part-1.onrender.com",
+      url: "https://w03-project2-part-1.onrender.com",
       
     },
     {
