@@ -1,17 +1,17 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Blogs API",
-    "description": "Blogs API",
+    "title": "Blog and Itinerary API",
+    "description": "Doc for  Blogs and Itinerary API ",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://w03-project2-part-1.onrender.com",
+      "url": "http://localhost:3000",
       "description": "Local server"
     },
     {
-      "url": "http://localhost:3000",
+      "url": "https://localhost:3000",
       "description": "Secure local server"
     }
   ],
@@ -191,6 +191,168 @@
           }
         }
       }
+    },
+    "/itineraries/": {
+      "get": {
+        "tags": [
+          "Itineraries"
+        ],
+        "summary": "Get all itineraries",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "List of itineraries",
+            "schema": {
+              "$ref": "#/components/schemas/Itinerary"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Itineraries"
+        ],
+        "summary": "Create a new itinerary",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Itinerary created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Itinerary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/itineraries/{id}": {
+      "get": {
+        "tags": [
+          "Itineraries"
+        ],
+        "summary": "Get itinerary by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "MongoDB ObjectId of the itinerary",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Itinerary found",
+            "schema": {
+              "$ref": "#/components/schemas/Itinerary"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Itinerary not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Itineraries"
+        ],
+        "summary": "Update itinerary by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "MongoDB ObjectId of the itinerary",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Itinerary updated successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Itinerary not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Itinerary"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Itineraries"
+        ],
+        "summary": "Delete itinerary by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "MongoDB ObjectId of the itinerary",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Itinerary deleted successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Itinerary not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -283,6 +445,98 @@
                   "type": {
                     "type": "string",
                     "example": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Itinerary": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "object"
+          },
+          "required": {
+            "type": "array",
+            "example": [
+              "title",
+              "destination",
+              "startDate",
+              "endDate"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "destination": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "startDate": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "format": {
+                    "type": "string",
+                    "example": "date-time"
+                  }
+                }
+              },
+              "endDate": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "format": {
+                    "type": "string",
+                    "example": "date-time"
+                  }
+                }
+              },
+              "notes": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "createdAt": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "format": {
+                    "type": "string",
+                    "example": "date-time"
                   }
                 }
               }

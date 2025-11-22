@@ -3,8 +3,8 @@ const swaggerAutogen = require("swagger-autogen")();
 const doc = {
   openapi: "3.0.0",
   info: {
-    title: "Blogs API",
-    description: "Blogs API",
+    title: "Blog and Itinerary API",
+    description: "Doc for  Blogs and Itinerary API ",
     version: "1.0.0",
   },
   servers: [
@@ -39,9 +39,23 @@ const doc = {
           userName: { type: "string" },
         },
       },
+
+      Itinerary: {
+        type: "object",
+        required: ["title", "destination", "startDate", "endDate"],
+        properties: {
+          title: { type: "string" },
+          destination: { type: "string" },
+          startDate: { type: "string", format: "date-time" },
+          endDate: { type: "string", format: "date-time" },
+          notes: { type: "string" },
+          createdAt: { type: "string", format: "date-time" },
+        },
+      },
     },
   },
 };
+
 
 const outputFile = "./swagger.json";
 const endpointsFiles = ["./routes/index.js"];

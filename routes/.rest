@@ -14,9 +14,9 @@ Content-Type: application/json
 
 
 {
-  "title": "My Second Blog",
+  "title": "My Third Blog",
   "content": "This is a full blog content with more than ten characters.",
-  "author": "John Bull",
+  "author": "John Bell",
   "category": "Tech",
   "summary": "A brief summary of the blog.",
   "userName": "john5"
