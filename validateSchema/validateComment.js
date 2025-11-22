@@ -1,7 +1,6 @@
 const Joi = require("joi");
 
 const commentSchema = Joi.object({
-  blogId: Joi.string().required(), // MongoDB ObjectId as string
   userName: Joi.string().alphanum().min(3).max(30).required(),
   comment: Joi.string().min(1).max(500).required(),
   createdAt: Joi.date().default(() => new Date()),

@@ -3,8 +3,8 @@ const swaggerAutogen = require("swagger-autogen")();
 const doc = {
   openapi: "3.0.0",
   info: {
-    title: "Blog and Itinerary planner API",
-    description: "Doc for  Blogs and Itinerary planner API ",
+    title: "Blog API",
+    description: "Doc for  Blogs API ",
     version: "1.0.0",
   },
   servers: [
@@ -13,7 +13,7 @@ const doc = {
       description: "Local server",
     },
     {
-      url: "https://localhost:3000",
+      url: "https://w03-project2-part-1.onrender.com",
       description: "Secure local server",
     },
   ],
@@ -39,32 +39,22 @@ const doc = {
           userName: { type: "string" },
         },
       },
-
-      Itinerary: {
-        type: "object",
-        required: ["title", "destination", "startDate", "endDate"],
-        properties: {
-          title: { type: "string" },
-          destination: { type: "string" },
-          startDate: { type: "string", format: "date-time" },
-          endDate: { type: "string", format: "date-time" },
-          notes: { type: "string" },
-          createdAt: { type: "string", format: "date-time" },
-        },
-      },
-      Comment: {
+Comment: {
         type: "object",
         required: ["blogId", "userName", "text"],
         properties: {
-          blogId: { type: "string", example: "64f123abc456def789012345" },
-          userName: { type: "string", example: "reviewer1" },
-          comment: { type: "string", example: "Great post!" },
-          createdAt: { type: "string", format: "date-time", example: "2025-11-22T17:20:00Z" }
+         userName: { type: "string" },
+          comment: { type: "string" },
+          createdAt: {
+            type: "string",
+            format: "date-time",
+            example: "2025-11-22T17:20:00Z",
+          },
         },
       },
     },
   },
-   };
+};
   
 
 

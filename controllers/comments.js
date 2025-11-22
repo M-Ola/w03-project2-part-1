@@ -3,6 +3,23 @@ const mongodb = require("../data/database");
 const ObjectId = require("mongodb").ObjectId;
 const isValidObjectId = (id) => ObjectId.isValid(id);
 
+
+//Read all comments
+const getAllComments = async (req, res) => {
+  try {
+    const comments = await mongodb
+      .getDatabase()
+      .collection("comments")
+      .find()
+      .toArray(); 
+    res.status(200).json(comments);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch comments." });
+  }
+};
+
+
+
 // READ: Get all comments for a blog
 const getCommentsForBlog = async (req, res) => {
   try {
@@ -93,6 +110,7 @@ const deleteComment = async (req, res) => {
 };
 
 module.exports = {
+    getAllComments,
   getCommentsForBlog,
   createComment,
   getSingleComment,

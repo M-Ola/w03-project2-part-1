@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Blog and Itinerary planner API",
-    "description": "Doc for  Blogs and Itinerary planner API ",
+    "title": "Blog API",
+    "description": "Doc for  Blogs API ",
     "version": "1.0.0"
   },
   "servers": [
@@ -11,7 +11,7 @@
       "description": "Local server"
     },
     {
-      "url": "https://localhost:3000",
+      "url": "https://w03-project2-part-1.onrender.com",
       "description": "Secure local server"
     }
   ],
@@ -192,6 +192,38 @@
         }
       }
     },
+    "/comments/": {
+      "get": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Get all comments in database",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "List of all comments",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/comments/blog/{blogId}": {
       "get": {
         "tags": [
@@ -276,12 +308,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Comment"
-              },
-              "example": {
-                "blogId": "64f123abc456def789012345",
-                "userName": "reviewer1",
-                "comment": "Great post!",
-                "createdAt": "2025-11-22T17:20:00Z"
               }
             }
           }
@@ -401,168 +427,6 @@
           }
         }
       }
-    },
-    "/itineraries/": {
-      "get": {
-        "tags": [
-          "Itineraries"
-        ],
-        "summary": "Get all itineraries",
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "List of itineraries",
-            "schema": {
-              "$ref": "#/components/schemas/Itinerary"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Itineraries"
-        ],
-        "summary": "Create a new itinerary",
-        "description": "",
-        "responses": {
-          "201": {
-            "description": "Itinerary created successfully"
-          },
-          "400": {
-            "description": "Validation error"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Itinerary"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/itineraries/{id}": {
-      "get": {
-        "tags": [
-          "Itineraries"
-        ],
-        "summary": "Get itinerary by ID",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "MongoDB ObjectId of the itinerary",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Itinerary found",
-            "schema": {
-              "$ref": "#/components/schemas/Itinerary"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Itinerary not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Itineraries"
-        ],
-        "summary": "Update itinerary by ID",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "MongoDB ObjectId of the itinerary",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Itinerary updated successfully"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Itinerary not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Itinerary"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Itineraries"
-        ],
-        "summary": "Delete itinerary by ID",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "MongoDB ObjectId of the itinerary",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Itinerary deleted successfully"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Itinerary not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -662,98 +526,6 @@
           }
         }
       },
-      "Itinerary": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "example": "object"
-          },
-          "required": {
-            "type": "array",
-            "example": [
-              "title",
-              "destination",
-              "startDate",
-              "endDate"
-            ],
-            "items": {
-              "type": "string"
-            }
-          },
-          "properties": {
-            "type": "object",
-            "properties": {
-              "title": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "destination": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "startDate": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "format": {
-                    "type": "string",
-                    "example": "date-time"
-                  }
-                }
-              },
-              "endDate": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "format": {
-                    "type": "string",
-                    "example": "date-time"
-                  }
-                }
-              },
-              "notes": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  }
-                }
-              },
-              "createdAt": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "format": {
-                    "type": "string",
-                    "example": "date-time"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "Comment": {
         "type": "object",
         "properties": {
@@ -775,29 +547,12 @@
           "properties": {
             "type": "object",
             "properties": {
-              "blogId": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "64f123abc456def789012345"
-                  }
-                }
-              },
               "userName": {
                 "type": "object",
                 "properties": {
                   "type": {
                     "type": "string",
                     "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "reviewer1"
                   }
                 }
               },
@@ -807,10 +562,6 @@
                   "type": {
                     "type": "string",
                     "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Great post!"
                   }
                 }
               },

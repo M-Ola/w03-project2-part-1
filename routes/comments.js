@@ -4,6 +4,21 @@ const router = express.Router();
 const commentsController = require("../controllers/comments");
 const validateComment = require("../validateSchema/validateComment");
 
+
+// GET all comments in database
+router.get("/", (req, res) => {
+  /* #swagger.tags = ['Comments']
+     #swagger.summary = 'Get all comments in database'
+     #swagger.responses[200] = {
+       description: 'List of all comments',
+       schema: { type: 'array', items: { $ref: "#/components/schemas/Comment" } }
+     }
+  */
+
+  commentsController.getAllComments(req, res);
+});
+
+
 // GET all comments for a blog
 router.get("/blog/:blogId", (req, res) => {
   /* #swagger.tags = ['Comments']
@@ -54,12 +69,6 @@ router.post("/blog/:blogId", validateComment, (req, res) => {
        content: {
          "application/json": {
            schema: { $ref: "#/components/schemas/Comment" },
-           example: {
-             blogId: "64f123abc456def789012345",
-             userName: "reviewer1",
-             comment: "Great post!",
-             createdAt: "2025-11-22T17:20:00Z"
-           }
          }
        }
      }
