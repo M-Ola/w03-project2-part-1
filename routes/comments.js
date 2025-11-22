@@ -1,9 +1,7 @@
-// routes/comments.js
 const express = require("express");
 const router = express.Router();
 const commentsController = require("../controllers/comments");
 const validateComment = require("../validateSchema/validateComment");
-
 
 // GET all comments in database
 router.get("/", (req, res) => {
@@ -14,15 +12,13 @@ router.get("/", (req, res) => {
        schema: { type: 'array', items: { $ref: "#/components/schemas/Comment" } }
      }
   */
-
   commentsController.getAllComments(req, res);
 });
-
 
 // GET all comments for a blog
 router.get("/blog/:blogId", (req, res) => {
   /* #swagger.tags = ['Comments']
-     #swagger.summary = 'Get all comments for a blog'
+     #swagger.summary = 'Get all comments for a specific blog'
      #swagger.parameters['blogId'] = {
        in: 'path',
        description: 'MongoDB ObjectId of the blog',
@@ -48,7 +44,10 @@ router.get("/:id", (req, res) => {
        required: true,
        schema: { type: 'string' }
      }
-     #swagger.responses[200] = { description: 'Comment found', schema: { $ref: "#/components/schemas/Comment" } }
+     #swagger.responses[200] = {
+       description: 'Comment found',
+       schema: { $ref: "#/components/schemas/Comment" }
+     }
      #swagger.responses[404] = { description: 'Comment not found' }
   */
   commentsController.getSingleComment(req, res);
@@ -68,12 +67,22 @@ router.post("/blog/:blogId", validateComment, (req, res) => {
        required: true,
        content: {
          "application/json": {
-           schema: { $ref: "#/components/schemas/Comment" },
+           schema: {
+             type: "object",
+             required: ["userName", "comment"],
+             properties: {
+               userName: { type: "string", example: "reviewer1" },
+               comment: { type: "string", example: "Great post! Very insightful." }
+             }
+           },
          }
        }
      }
-     #swagger.responses[201] = { description: 'Comment created successfully' }
-     #swagger.responses[400] = { description: 'Validation error' }
+     #swagger.responses[201] = {
+       description: 'Comment created successfully',
+       schema: { type: 'object', properties: { id: { type: 'string' } } }
+     }
+     #swagger.responses[400] = { description: 'Validation error or invalid blogId' }
   */
   commentsController.createComment(req, res);
 });
@@ -92,8 +101,15 @@ router.put("/:id", validateComment, (req, res) => {
        required: true,
        content: {
          "application/json": {
-           schema: { $ref: "#/components/schemas/Comment" }
-         }
+           schema: {
+             type: "object",
+             required: ["userName", "comment"],
+             properties: {
+               userName: { type: "string", example: "reviewer1" },
+               comment: { type: "string", example: "Updated comment text" }
+             }
+           },
+            }
        }
      }
      #swagger.responses[204] = { description: 'Comment updated successfully' }

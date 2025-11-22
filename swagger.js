@@ -9,12 +9,12 @@ const doc = {
   },
   servers: [
     {
-      url: "http://localhost:3000",
-      description: "Local server",
+      url: "http://w03-project2-part-1.onrender.com",
+      
     },
     {
-      url: "https://w03-project2-part-1.onrender.com",
-      description: "Secure local server",
+      url: "http://localhost:3000",
+      
     },
   ],
   components: {
@@ -39,11 +39,11 @@ const doc = {
           userName: { type: "string" },
         },
       },
-Comment: {
+      Comment: {
         type: "object",
         required: ["blogId", "userName", "text"],
         properties: {
-         userName: { type: "string" },
+          userName: { type: "string" },
           comment: { type: "string" },
           createdAt: {
             type: "string",
