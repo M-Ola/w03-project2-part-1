@@ -3,8 +3,8 @@ const swaggerAutogen = require("swagger-autogen")();
 const doc = {
   openapi: "3.0.0",
   info: {
-    title: "Blog and Itinerary API",
-    description: "Doc for  Blogs and Itinerary API ",
+    title: "Blog and Itinerary planner API",
+    description: "Doc for  Blogs and Itinerary planner API ",
     version: "1.0.0",
   },
   servers: [
