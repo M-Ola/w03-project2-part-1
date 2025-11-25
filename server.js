@@ -14,14 +14,18 @@ app.use(express.json());
 
 app.use(
   session({
-    secret: process.env.ACCESS_TOKEN_SECRET, 
+    secret: process.env.ACCESS_TOKEN_SECRET,
     resave: false,
     saveUninitialized: false,
   })
 );
 
+
+//This is the basic express sessionf({..}) initialization.
 app.use(passport.initialize());
+// init passport on every route call.
 app.use(passport.session());
+
 
 app.use(
   cors({ origin: "*", methods: ["GET", "POST", "DELETE", "PUT", "PATCH"] })
@@ -86,7 +90,7 @@ app.get("/", (req, res) => {
 
 app.get(
   "/auth/github",
-  passport.authenticate("github", { scope: ["user:email"] })
+  passport.authenticate("github")
 );
 
 app.get(
