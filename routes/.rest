@@ -40,3 +40,17 @@ Content-Type: application/json
 ### delete blog
 DELETE https://w03-project2-part-1.onrender.com/blogs/691c9382e5c1cfa7a0c21a85
 Content-Type: application/json
+
+### Get all comments
+GET https://w03-project2-part-1.onrender.com/comments
+Content-Type: application/json
+
+### Update comments
+PUT https://w03-project2-part-1.onrender.com/comments/69220a4228207b3d8165a2e9 HTTP/1.1
+Content-Type: application/json
+{
+"userName": "reviewer1",
+"comment": "Good  post!"
+
+
+}
