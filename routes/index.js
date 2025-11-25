@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 
 router.use("/", require("./swagger"));
@@ -9,15 +10,33 @@ router.use("/blogs", require("./blogs"));
 router.use("/comments", require("./comments"));
 
 // GitHub login (redirects to GitHub)
-router.get("/login", passport.authenticate("github", { scope: ["user:email"] }));
+router.get("/login", passport.authenticate("github"));
 
 // GitHub callback (GitHub redirects here after login)
 router.get(
   "/github/callback",
-  passport.authenticate("github", { failureRedirect: "/login" }),
+  passport.authenticate("github", { failureRedirect: "/login", session: false }),
   (req, res) => {
+   
+   const payload = {
+     id: req.user._id,
+     username: req.user.username,
+   };
+
+   // Sign token
+   const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+     expiresIn: "1h",
+   });
+
+   // Return token as JSON (Swagger can use this)
+   res.json({ token });
+   
+
+
+
+
     // Successful login
-    res.redirect("/"); // or wherever you want to send the user
+   //res.redirect("/"); // or wherever you want to send the user
   }
 );
 

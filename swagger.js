@@ -4,20 +4,22 @@ const doc = {
   openapi: "3.0.0",
   info: {
     title: "Blog API",
-    description: "Doc for  Blogs API ",
+    description: "Doc for Blogs API",
     version: "1.0.0",
   },
   servers: [
-    {
-      url: "https://w03-project2-part-1.onrender.com",
-      
-    },
-    {
-      url: "http://localhost:3000",
-      
-    },
+    { url: "https://w03-project2-part-1.onrender.com" },
+    { url: "http://localhost:3000" },
   ],
   components: {
+    // 🔑 Add securitySchemes here
+    securitySchemes: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+      },
+    },
     schemas: {
       Blog: {
         type: "object",
@@ -54,15 +56,15 @@ const doc = {
       },
     },
   },
+  // 🔑 Apply security globally (optional)
+  security: [
+    {
+      bearerAuth: [],
+    },
+  ],
 };
-  
-
 
 const outputFile = "./swagger.json";
 const endpointsFiles = ["./routes/index.js"];
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
-
-
-
-

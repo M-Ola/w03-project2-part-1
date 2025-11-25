@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const blogsController = require("../controllers/blogs");
 const validateBlog = require("../validateSchema/validateBlog");
-const { isAuthenticated } = require('../middleware/authenticate');
+const { verifyToken } = require('../middleware/authenticate');
 
 // GET all blogs
 router.get("/", (req, res) => {
@@ -30,7 +30,7 @@ router.get("/:id", (req, res) => {
 });
 
 // POST create new blog
-router.post("/", isAuthenticated, validateBlog, (req, res) => {
+router.post("/", verifyToken, validateBlog, (req, res) => {
   /* #swagger.tags = ['Blogs']
      #swagger.summary = 'Create a new blog'
      #swagger.requestBody = {
@@ -48,7 +48,7 @@ router.post("/", isAuthenticated, validateBlog, (req, res) => {
 });
 
 // PUT update blog by ID
-router.put("/:id", isAuthenticated, validateBlog, (req, res) => {
+router.put("/:id", verifyToken, validateBlog, (req, res) => {
   /* #swagger.tags = ['Blogs']
      #swagger.summary = 'Update blog by ID'
      #swagger.parameters['id'] = {
@@ -72,7 +72,7 @@ router.put("/:id", isAuthenticated, validateBlog, (req, res) => {
 });
 
 // DELETE blog by ID
-router.delete("/:id", isAuthenticated, (req, res) => {
+router.delete("/:id", verifyToken, (req, res) => {
   /* #swagger.tags = ['Blogs']
      #swagger.summary = 'Delete blog by ID'
      #swagger.parameters['id'] = {
