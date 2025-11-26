@@ -13,7 +13,7 @@ module.exports = { isAuthenticated };
 
 
 function verifyToken(req, res, next) {
-  // 🚀 Skip JWT check in development/local
+  // Skip JWT check in development/local
   if (process.env.NODE_ENV !== "production") {
     return next();
   }
