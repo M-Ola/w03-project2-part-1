@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const blogsController = require("../controllers/blogs");
 const validateBlog = require("../validateSchema/validateBlog");
-const { verifyToken } = require('../middleware/authenticate');
+const { isAuthenticated } = require("../middleware/authenticate");
 
 // GET all blogs
 router.get("/", (req, res) => {
@@ -29,11 +29,11 @@ router.get("/:id", (req, res) => {
   blogsController.getSingleBlog(req, res);
 });
 
-// POST create new blog
-router.post("/", verifyToken, validateBlog, (req, res) => {
-  // #swagger.security = [{ "bearerAuth": [] }]
+// POST create new blog (requires login)
+router.post("/", isAuthenticated, validateBlog, (req, res) => {
   /* #swagger.tags = ['Blogs']
      #swagger.summary = 'Create a new blog'
+     #swagger.description = 'Requires GitHub login (session cookie).'
      #swagger.requestBody = {
        required: true,
        content: {
@@ -44,15 +44,16 @@ router.post("/", verifyToken, validateBlog, (req, res) => {
      }
      #swagger.responses[201] = { description: 'Blog created successfully' }
      #swagger.responses[400] = { description: 'Validation error' }
+     #swagger.responses[401] = { description: 'Unauthorized (not logged in)' }
   */
   blogsController.createBlog(req, res);
 });
 
-// PUT update blog by ID
-router.put("/:id", verifyToken, validateBlog, (req, res) => {
-  // #swagger.security = [{ "bearerAuth": [] }]
- /* #swagger.tags = ['Blogs']
+// PUT update blog by ID (requires login)
+router.put("/:id", isAuthenticated, (req, res) => {
+  /* #swagger.tags = ['Blogs']
      #swagger.summary = 'Update blog by ID'
+     #swagger.description = 'Requires GitHub login (session cookie).'
      #swagger.parameters['id'] = {
        in: 'path',
        description: 'MongoDB ObjectId of the blog',
@@ -69,15 +70,16 @@ router.put("/:id", verifyToken, validateBlog, (req, res) => {
      }
      #swagger.responses[204] = { description: 'Blog updated successfully' }
      #swagger.responses[404] = { description: 'Blog not found' }
+     #swagger.responses[401] = { description: 'Unauthorized (not logged in)' }
   */
   blogsController.updateBlog(req, res);
 });
 
-// DELETE blog by ID
-router.delete("/:id", verifyToken, (req, res) => {
- //#swagger.security = [{ "bearerAuth": [] }]
+// DELETE blog by ID (requires login)
+router.delete("/:id", isAuthenticated, (req, res) => {
   /* #swagger.tags = ['Blogs']
      #swagger.summary = 'Delete blog by ID'
+     #swagger.description = 'Requires GitHub login (session cookie).'
      #swagger.parameters['id'] = {
        in: 'path',
        description: 'MongoDB ObjectId of the blog',
@@ -86,6 +88,7 @@ router.delete("/:id", verifyToken, (req, res) => {
      }
      #swagger.responses[204] = { description: 'Blog deleted successfully' }
      #swagger.responses[404] = { description: 'Blog not found' }
+     #swagger.responses[401] = { description: 'Unauthorized (not logged in)' }
   */
   blogsController.deleteBlog(req, res);
 });

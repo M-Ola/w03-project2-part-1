@@ -1,16 +1,28 @@
-const jwt = require("jsonwebtoken");
-/* function isAuthenticated(req, res, next) {
+//const jwt = require("jsonwebtoken");
+ 
+
+function isAuthenticated(req, res, next) {
+  // Passport adds this helper
   if (req.isAuthenticated && req.isAuthenticated()) {
     return next();
   }
-  res.status(401).json({ error: "Not authenticated. Please log in with GitHub." });
+  // Not logged in → block access
+  res.status(401).json({ error: "Unauthorized. Please log in with GitHub." });
 }
 
 module.exports = { isAuthenticated };
- */
+
+
+
+
+
 
 // middleware/authenticate.js
 
+
+
+
+/* 
 
 function verifyToken(req, res, next) {
   // Skip JWT check in development/local
@@ -41,3 +53,4 @@ function verifyToken(req, res, next) {
 
 
 module.exports = { verifyToken };
+ */

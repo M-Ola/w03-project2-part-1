@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const commentsController = require("../controllers/comments");
 const validateComment = require("../validateSchema/validateComment");
-const { verifyToken } = require("../middleware/authenticate");
+const { isAuthenticated } = require("../middleware/authenticate");
 
 // GET all comments in database
 router.get("/", (req, res) => {
@@ -55,7 +55,7 @@ router.get("/:id", (req, res) => {
 });
 
 // POST create a new comment for a blog
-router.post("/blog/:blogId", verifyToken, validateComment, (req, res) => {
+router.post("/blog/:blogId", isAuthenticated, validateComment, (req, res) => {
   /* #swagger.tags = ['Comments']
      #swagger.summary = 'Create a new comment for a blog'
      #swagger.parameters['blogId'] = {
@@ -89,7 +89,7 @@ router.post("/blog/:blogId", verifyToken, validateComment, (req, res) => {
 });
 
 // PUT update comment by ID
-router.put("/:id", verifyToken, validateComment, (req, res) => {
+router.put("/:id", isAuthenticated, validateComment, (req, res) => {
   /* #swagger.tags = ['Comments']
      #swagger.summary = 'Update a comment by ID'
      #swagger.parameters['id'] = {
@@ -120,7 +120,7 @@ router.put("/:id", verifyToken, validateComment, (req, res) => {
 });
 
 // DELETE comment by ID
-router.delete("/:id", verifyToken, (req, res) => {
+router.delete("/:id", isAuthenticated, (req, res) => {
   /* #swagger.tags = ['Comments']
      #swagger.summary = 'Delete a comment by ID'
      #swagger.parameters['id'] = {

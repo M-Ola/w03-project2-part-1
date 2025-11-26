@@ -1,48 +1,33 @@
-const express = require("express");
+/* const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const jwt = require("jsonwebtoken");
 
+// Swagger docs
 router.use("/", require("./swagger"));
+
 // Feature routes
 router.use("/blogs", require("./blogs"));
 router.use("/comments", require("./comments"));
 
-// GitHub login (redirects to GitHub)
-router.get("/login", passport.authenticate("github"));
+// Custom login route
+router.get("/login", (req, res) => {
+  if (req.isAuthenticated && req.isAuthenticated()) {
+    res.send(`Logged in as ${req.user.username}`);
+  } else {
+    // No session → redirect to GitHub OAuth
+    res.redirect("/auth/github");
+  }
+});
 
-// GitHub callback (GitHub redirects here after login)
+// GitHub OAuth
+router.get("/auth/github", passport.authenticate("github"));
+
+// GitHub callback
 router.get(
   "/github/callback",
-  passport.authenticate("github", {
-    failureRedirect: "/login",
-    session: false,
-  }),
+  passport.authenticate("github", { failureRedirect: "/login", session: true }),
   (req, res) => {
-    /* #swagger.tags = ['Auth']
-       #swagger.summary = 'GitHub OAuth callback'
-       #swagger.description = 'Completes GitHub login and returns a JWT token'
-       #swagger.responses[200] = {
-         description: 'JWT issued after successful login',
-         schema: { token: 'string' }
-       }
-    */
-
-    const payload = {
-      id: req.user._id,
-      username: req.user.username,
-    };
-
-    // Sign token
-    const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "1h",
-    });
-
-    // Return token as JSON (Swagger can use this)
-    res.json({ token });
-
-    // Successful login
-    //res.redirect("/"); // or wherever you want to send the user
+    res.redirect("/"); // or /api-docs
   }
 );
 
@@ -50,7 +35,63 @@ router.get(
 router.get("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
-    res.redirect("/");
+    req.session.destroy(() => {
+      res.clearCookie("connect.sid");
+      res.redirect("/");
+    });
+  });
+});
+
+module.exports = router;
+
+
+
+
+ */
+
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
+
+// Feature routes
+router.use("/blogs", require("./blogs"));
+router.use("/comments", require("./comments"));
+
+// Swagger docs
+router.use("/", require("./swagger"));
+
+// Custom login route
+router.get("/login", (req, res) => {
+  if (req.isAuthenticated && req.isAuthenticated()) {
+    res.send(`Logged in as ${req.user.username}`);
+  } else {
+    // No session → redirect to GitHub OAuth
+    res.redirect("/auth/github");
+  }
+});
+
+// GitHub OAuth
+router.get("/auth/github", passport.authenticate("github"));
+
+// GitHub callback
+router.get(
+  "/github/callback",
+  passport.authenticate("github", { failureRedirect: "/login", session: true }),
+  (req, res) => {
+    // After successful login, redirect reviewers straight to Swagger UI
+    res.redirect("/api-docs");
+  }
+);
+
+// Logout
+router.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+    req.session.destroy(() => {
+      res.clearCookie("connect.sid");
+      // ✅ Instead of redirecting, send a clear message
+      res.send("Logged out");
+    });
   });
 });
 

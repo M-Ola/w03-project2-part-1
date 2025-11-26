@@ -12,14 +12,8 @@ const doc = {
     { url: "http://localhost:3000" },
   ],
   components: {
-   securitySchemes: {
-      bearerAuth: {
-        type: "http",
-        scheme: "bearer",
-        bearerFormat: "JWT",
-      },
-    },
-    schemas: {
+   
+schemas: {
       Blog: {
         type: "object",
         required: [
@@ -58,6 +52,7 @@ const doc = {
   
   
 };
+
 
 const outputFile = "./swagger.json";
 const endpointsFiles = ["./routes/index.js"];
