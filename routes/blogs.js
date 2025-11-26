@@ -31,6 +31,7 @@ router.get("/:id", (req, res) => {
 
 // POST create new blog
 router.post("/", verifyToken, validateBlog, (req, res) => {
+  // #swagger.security = [{ "bearerAuth": [] }]
   /* #swagger.tags = ['Blogs']
      #swagger.summary = 'Create a new blog'
      #swagger.requestBody = {
@@ -49,7 +50,8 @@ router.post("/", verifyToken, validateBlog, (req, res) => {
 
 // PUT update blog by ID
 router.put("/:id", verifyToken, validateBlog, (req, res) => {
-  /* #swagger.tags = ['Blogs']
+  // #swagger.security = [{ "bearerAuth": [] }]
+ /* #swagger.tags = ['Blogs']
      #swagger.summary = 'Update blog by ID'
      #swagger.parameters['id'] = {
        in: 'path',
@@ -73,6 +75,7 @@ router.put("/:id", verifyToken, validateBlog, (req, res) => {
 
 // DELETE blog by ID
 router.delete("/:id", verifyToken, (req, res) => {
+ //#swagger.security = [{ "bearerAuth": [] }]
   /* #swagger.tags = ['Blogs']
      #swagger.summary = 'Delete blog by ID'
      #swagger.parameters['id'] = {

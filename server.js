@@ -7,6 +7,7 @@ const GitHubStrategy = require("passport-github2").Strategy;
 const cors = require("cors");
 const { ObjectId } = require("mongodb");
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
 const port = process.env.PORT || 3000;
 
@@ -97,7 +98,21 @@ app.get(
   "/github/callback",
   passport.authenticate("github", { failureRedirect: "/api-docs" }),
   (req, res) => {
-    res.redirect("/");
+    // Build payload from GitHub profile
+    const payload = {
+      id: req.user.id, // GitHub user ID
+      username: req.user.username, // GitHub username
+    };
+
+    // Sign JWT
+    const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "1h",
+    });
+
+    // Return token as JSON
+    res.json({ token });
+
+    //res.redirect("/");
   }
 );
 

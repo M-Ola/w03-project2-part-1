@@ -12,8 +12,7 @@ const doc = {
     { url: "http://localhost:3000" },
   ],
   components: {
-    // 🔑 Add securitySchemes here
-    securitySchemes: {
+   securitySchemes: {
       bearerAuth: {
         type: "http",
         scheme: "bearer",
@@ -56,12 +55,8 @@ const doc = {
       },
     },
   },
-  // 🔑 Apply security globally (optional)
-  security: [
-    {
-      bearerAuth: [],
-    },
-  ],
+  
+  
 };
 
 const outputFile = "./swagger.json";
