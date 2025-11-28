@@ -10,26 +10,26 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-/* -------------------------
-   SESSION CONFIG
-------------------------- */
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // true on Render
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+    },
   })
 );
 
-/* -------------------------
-   PASSPORT CONFIG
-------------------------- */
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-/* -------------------------
-   CORS CONFIG (FIXED)
-------------------------- */
+
 app.use(
   cors({
     origin: [
@@ -42,24 +42,23 @@ app.use(
   })
 );
 
-/* -------------------------
-   ROUTES
-------------------------- */
+
 app.use("/", require("./routes"));
 
-/* -------------------------
-   GITHUB CALLBACK
-------------------------- */
+
 app.get(
   "/github/callback",
   passport.authenticate("github", {
     failureRedirect: "/api-docs",
-    session: true, // IMPORTANT FIX
+    session: true, 
   }),
   (req, res) => {
     res.redirect("/");
   }
 );
+
+
+ 
 
 /* -------------------------
    START SERVER

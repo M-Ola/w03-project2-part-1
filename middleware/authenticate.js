@@ -1,7 +1,5 @@
-//const jwt = require("jsonwebtoken");
- 
 
-function isAuthenticated(req, res, next) {
+ function isAuthenticated(req, res, next) {
   // Passport adds this helper
   if (req.isAuthenticated && req.isAuthenticated()) {
     return next();
