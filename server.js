@@ -1,16 +1,17 @@
+// server.js
+require("dotenv").config();
 const express = require("express");
 const mongodb = require("./data/database");
-const app = express();
 const passport = require("./config/passport");
 const session = require("express-session");
 const cors = require("cors");
-require("dotenv").config();
 
+const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-
+// Session middleware
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -25,11 +26,11 @@ app.use(
   })
 );
 
-
+// Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+// CORS
 app.use(
   cors({
     origin: [
@@ -42,33 +43,16 @@ app.use(
   })
 );
 
-
+// Mount routes (includes /login, /github/callback, /logout, /api-docs, etc.)
 app.use("/", require("./routes"));
 
-
-app.get(
-  "/github/callback",
-  passport.authenticate("github", {
-    failureRedirect: "/api-docs",
-    session: true, 
-  }),
-  (req, res) => {
-    res.redirect("/");
-  }
-);
-
-
- 
-
-/* -------------------------
-   START SERVER
-------------------------- */
+// Start server after DB init
 mongodb.initDb((err) => {
   if (err) {
     console.error(err);
   } else {
     app.listen(port, () => {
-      console.log(`Database connected. Node running on port ${port}`);
+      console.log(`✅ Database connected. Node running on port ${port}`);
     });
   }
 });
