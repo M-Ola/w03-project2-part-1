@@ -26,6 +26,7 @@ app.use(
   })
 );
 
+app.set("trust proxy", 1);
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -35,13 +36,27 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "http://localhost:5173",
       "https://your-app.onrender.com",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
 );
+app.set("trust proxy", 1);
+ app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    proxy: true,
+    cookie: {
+      httpOnly: true,
+      secure: true, // Render uses HTTPS → must be true
+      sameSite: "none", // REQUIRED for cross-site cookies
+    },
+  })
+);
+
 
 // Mount routes (includes /login, /github/callback, /logout, /api-docs, etc.)
 app.use("/", require("./routes"));
