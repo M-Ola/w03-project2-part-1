@@ -385,12 +385,12 @@
                 ],
                 "properties": {
                   "userName": {
-                    "type": "string",
-                    "example": "reviewer1"
+                    "type": "string"
+                    
                   },
                   "comment": {
-                    "type": "string",
-                    "example": "Great post! Very insightful."
+                    "type": "string"
+                    
                   }
                 }
               }
@@ -483,12 +483,12 @@
                 ],
                 "properties": {
                   "userName": {
-                    "type": "string",
-                    "example": "reviewer1"
+                    "type": "string"
+                    
                   },
                   "comment": {
-                    "type": "string",
-                    "example": "Updated comment text"
+                    "type": "string"
+                    
                   }
                 }
               }
@@ -540,8 +540,8 @@
         "type": "object",
         "properties": {
           "type": {
-            "type": "string",
-            "example": "object"
+            "type": "string"
+            
           },
           "required": {
             "type": "array",
@@ -564,8 +564,8 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "example": "string"
+                    "type": "string"
+                  
                   }
                 }
               },
@@ -573,8 +573,8 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "example": "string"
+                    "type": "string"
+                   
                   }
                 }
               },
@@ -582,8 +582,8 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "example": "string"
+                    "type": "string"
+                  
                   }
                 }
               },
@@ -591,8 +591,8 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "example": "string"
+                    "type": "string"
+                   
                   }
                 }
               },
@@ -600,8 +600,8 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "example": "string"
+                    "type": "string"
+                   
                   }
                 }
               },
@@ -622,8 +622,8 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "example": "string"
+                    "type": "string"
+                    
                   }
                 }
               }
@@ -635,8 +635,8 @@
         "type": "object",
         "properties": {
           "type": {
-            "type": "string",
-            "example": "object"
+            "type": "string"
+           
           },
           "required": {
             "type": "array",
@@ -656,8 +656,8 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "example": "string"
+                    "type": "string"
+                   
                   }
                 }
               },
@@ -665,8 +665,8 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "example": "string"
+                    "type": "string"
+                    
                   }
                 }
               },
@@ -674,16 +674,16 @@
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "example": "string"
+                    "type": "string"
+                    
                   },
                   "format": {
-                    "type": "string",
-                    "example": "date-time"
+                    "type": "string"
+                    
                   },
                   "example": {
-                    "type": "string",
-                    "example": "2025-11-22T17:20:00Z"
+                    "type": "string"
+                    
                   }
                 }
               }
