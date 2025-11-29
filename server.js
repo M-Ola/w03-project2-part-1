@@ -21,7 +21,7 @@ app.use(
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // true on Render
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
+     // maxAge: 1000 * 60 * 60 * 24,
     },
   })
 );
@@ -51,7 +51,7 @@ app.set("trust proxy", 1);
     proxy: true,
     cookie: {
       httpOnly: true,
-      secure: true, // Render uses HTTPS → must be true
+      secure: true, // 
       sameSite: "none", // REQUIRED for cross-site cookies
     },
   })

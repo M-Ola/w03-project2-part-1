@@ -3,23 +3,20 @@ const express = require("express");
 const router = express.Router();
 const passport = require("../config/passport");
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("../swagger.json"); // adjust path/filename
+const swaggerDocument = require("../swagger.json"); 
 
-/* -------------------------
-   API ROUTES
-------------------------- */
+
+  
+//API routes
 router.use("/blogs", require("./blogs"));
 router.use("/comments", require("./comments"));
 
-/* -------------------------
-   SWAGGER DOCS
-------------------------- */
+
+  // Swagger docs
 router.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-/* -------------------------
-   AUTH ROUTES
-------------------------- */
-// Start GitHub OAuth
+
+  // Start GitHub OAuth
 router.get(
   "/login",
   passport.authenticate("github", { scope: ["user:email"] })
